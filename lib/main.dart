@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-
-void main(){
+void main() {
   runApp(MyApp());
 }
 
@@ -9,78 +8,124 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'My Image Carousel App',
+      title: 'My Profile App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(),
+      home: ProfilePage(),
     );
   }
 }
 
-class HomePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
+  @override
+  _ProfilePageState createState() => _ProfilePageState();
+}
 
-  final List imageUrls = [
-    'https://picsum.photos/400/300?random=1',
-    'https://picsum.photos/400/300?random=2',
-    'https://picsum.photos/400/300?random=3',
-    'https://picsum.photos/400/300?random=4',
-    'https://picsum.photos/400/300?random=5',
-  ];
-
+class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[100],
       appBar: AppBar(
-        title: Text('My Photo Gallery'),
+        title: Text('Profile'),
+        centerTitle: true,
         backgroundColor: Colors.blue,
+        elevation: 0,
       ),
-      body: Column(
-        children: [
-          Container(
-            height: 300,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: imageUrls.length,
-              itemBuilder: (context, index) {
-                return Container(
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.network(
-                      imageUrls[index],
-                      width: 400,
-                      height: 300,
-                      fit: BoxFit.cover,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // Profile Pic
+            Container(
+              width: 160,
+              height: 160,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: Colors.blue,
+                  width: 4,
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black26,
+                    blurRadius: 10,
+                    offset: Offset(0, 5),
+                  ),
+                ],
+              ),
+              child: ClipOval(
+                child: Image.network(
+                  'https://sa.kapamilya.com/absnews/abscbnnews/media/2023/entertainment/01/23/01232023-why-coco-martin-opts-to-keep-personal-life-private.jpg', // Placeholder image URL
+                  width: 160,
+                  height: 160,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            // Name
+            SizedBox(height: 20),
+            Text(
+              'Lancero, Russell',
+              style: TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+                color: Colors.black87,
+              ),
+            ),
+            // Job Title
+            SizedBox(height: 8),
+            Text(
+              'BSIT Student', // Fixed typo here
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.blue,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+
+            //about me
+            SizedBox(height: 30),
+            Container(
+              padding: EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 8,
+                      offset: Offset(0, 3)
+                  ),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'About Me',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.blue,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                );
-              },
-            ),
-          ),
-
-          Padding(padding: EdgeInsets.all(16.0),
-            child: Column(
-              children: [
-                Text('Image Gallery',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.blue,
-                  ),
-                ),
-
-                SizedBox(height: 8),
-                Text('Swipe left to explore the amazing photos. These Amazing Photos.',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.grey[600],
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            ),
-          ),
-        ],
+                  SizedBox(height: 20),
+                  Text(
+                    'I am currently a 3rd year BSIT student at Global Reciprocal Colleges',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.grey[700],
+                      height: 1.5,
+                    ),
+                    textAlign: TextAlign.left,
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
